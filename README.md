@@ -1,0 +1,4 @@
+Gametype
+========
+
+ShadyMod Gametype
