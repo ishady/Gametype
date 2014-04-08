@@ -1,0 +1,22 @@
+if (g_timelimit.integer && twimod_infected.integer && !level.warmupTime )
+	{
+		for ( i = 0; i < MAX_CLIENTS; i++)
+		{
+			if (!cl[i].sess.infected && level.infectedstart == 1 &&
+			level.time - level.startTime >= g_timelimit.integer*60000) 
+				{
+					trap_SendServerCommand( -1, va("print \"^1The survivors have won!^7.\n\""));
+					LogExit( "The survivors have won!" );
+					trap_SendConsoleCommand( EXEC_INSERT, va( "exec gametypes/infected.cfg") );
+					return;
+				}
+			 if (cl[i].sess.infected && level.infectedstart == 1 
+			&& level.time - level.startTime < g_timelimit.integer*60000)
+				{
+					trap_SendServerCommand( -1, va("print \"^1The Infected have won!^7.\n\""));
+					LogExit( "The Infected have won!" );
+					trap_SendConsoleCommand( EXEC_INSERT, va( "exec gametypes/infected.cfg") );
+					return;
+				}
+		}
+	}
